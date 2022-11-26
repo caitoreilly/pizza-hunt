@@ -27,7 +27,7 @@ const commentController = {
     Comment.findOneAndUpdate(
       { _id: params.commentId },
       { $push: { replies: body } },
-      { new: true }
+      { new: true, runValidators: TextTrackCue }
     )
       .then((dbPizzaData) => {
         if (!dbPizzaData) {

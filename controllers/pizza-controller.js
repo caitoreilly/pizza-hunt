@@ -56,7 +56,10 @@ const pizzaController = {
   // if we don't set the 3rd param {new:true}, it will return to the OG doc
   // set param to true so it instructs mongoose to return the new version of the doc
   updatePizza({ params, body }, res) {
-    Pizza.findOneAndUpdate({ _id: params.id }, body, { new: true })
+    Pizza.findOneAndUpdate({ _id: params.id }, body, {
+      new: true,
+      runValidators: true,
+    })
       .then((dbPizzaData) => {
         if (!dbPizzaData) {
           res.status(400).json({ message: "No pizza found with this id" });
